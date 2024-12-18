@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metacentric Height Experiment</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+            transition: all 0.5s ease;
+        }
+
+        /* Navbar Styling */
+        nav {
+            background-color: #2c3e50;
+            padding: 15px 30px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease, color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #16a085;
+            transform: translateY(-3px);
+            color: #ecf9f2;
+        }
+
+        /* Container Styling */
+        .container {
+            max-width: 800px;
+            width: 90%;
+            background: #fff;
+            padding: 25px;
+            margin: 70px auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.6rem;
+            color: #2c3e50;
+            margin-top: 20px;
+            transition: color 0.3s ease;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #34495e;
+            margin-top: 30px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 0.5s;
+        }
+
+        p, ul {
+            font-size: 1.1rem;
+            color: #555;
+            margin-top: 15px;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 1s;
+        }
+
+        ul {
+            padding-left: 20px;
+            list-style: disc;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #16a085;
+        }
+
+        input, button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1.1rem;
+            box-sizing: border-box;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, button:focus {
+            outline: none;
+            border-color: #16a085;
+        }
+
+        button {
+            background-color: #2c3e50;
+            color: white;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #34495e;
+            transform: translateY(-2px);
+        }
+
+        .result {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            background: #ecf9f2;
+            padding: 15px;
+            border: 1px solid #16a085;
+            border-radius: 5px;
+            animation: fadeIn 1s forwards;
+            animation-delay: 1.5s;
+        }
+
+        .team {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #444;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 2s;
+        }
+
+        /* Experimental Setup Image Section */
+        .experiment-setup {
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .experiment-setup img {
+            width: 80%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .experiment-setup img:hover {
+            transform: scale(1.05);
+        }
+
+        /* Animation for fade-in */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Offset for Navbar */
+        .section {
+            padding-top: 70px; /* Adjust top padding to account for fixed navbar */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#formula">Formula</a></li>
+            <li><a href="#determination">Determination</a></li>
+            <li><a href="#experiment-setup">Experimental Setup</a></li>
+            <li><a href="#theoretical-calculator">Theoretical Calculator</a></li>
+            <li><a href="#experimental-calculator">Experimental Calculator</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <header>
+            <h1>Metacentric Height Experiment</h1>
+        </header>
+
+        <!-- Introduction Section -->
+        <div id="introduction" class="section">
+            <h2>Introduction</h2>
+            <p>
+                The <span class="highlight">Metacentric Height</span> is the distance between the center of gravity and the metacenter of a floating body. 
+                It determines the stability of the body in water. This experiment involves measuring the metacentric height 
+                using theoretical and experimental methods.
+            </p>
+        </div>
+
+        <!-- Formula Section -->
+        <div id="formula" class="section">
+            <h2>Formula</h2>
+            <p>
+                <strong>Experimental GM:</strong> 
+                <span class="highlight">GM = (w1 × Y) / (W × tan(θ))</span>
+            </p>
+            <p>
+                <strong>Theoretical GM:</strong> 
+                <span class="highlight">GM = (I / V) + m</span>
+            </p>
+        </div>
+
+        <!-- Determination Section -->
+        <div id="determination" class="section">
+            <h2>Determination of Metacentric Height</h2>
+            <h3>Apparatus Required</h3>
+            <ul>
+                <li>A Tank</li>
+                <li>A Floating Ship which contains a horizontal beam at its middle and a movable pointer on a graduated scale at the center of the horizontal beam.</li>
+                <li>Weights</li>
+            </ul>
+
+            <h3>Test Procedure</h3>
+            <p>Test procedure to find metacentric height of a floating body is as follows:</p>
+            <ol>
+                <li>Take an empty tank and fill it with water up to 2/3rd of its height and note down the height of water level (Z1).</li>
+                <li>Now place the floating ship in the tank and note down the rise in the water level (Z2).</li>
+                <li>Adjust the floating ship in such a way that the pointer should show zero reading on the graduated scale.</li>
+                <li>After adjusting, add weight (w1) to the horizontal beam of floating ship at a known distance (Y) from the center of the beam.</li>
+                <li>Now the ship will tilt at some angle on one side; observe the tilt angle on the graduated scale and note it down.</li>
+                <li>Repeat the same procedure 4 more times by keeping the load constant and varying the distance or by keeping the distance constant and varying the load.</li>
+                <li>Finally, calculate the metacentric height using the given formula.</li>
+            </ol>
+        </div>
+
+        <!-- Experimental Setup Image Section -->
+        <div id="experiment-setup" class="experiment-setup">
+            <h2>Experimental Setup</h2>
+            <p>Here is the experimental setup used for determining the metacentric height:</p>
+            <img src="Metacentric-Height-Apparatus.webp" alt="Experimental Setup">
+        </div>
+
+        <!-- Theoretical Calculator Section -->
+        <div id="theoretical-calculator" class="section">
+            <h2>Theoretical Metacentric Height Calculator</h2>
+            <label for="I">Moment of Inertia (I) [m<sup>4</sup>]:</label>
+            <input type="number" id="I" step="any" placeholder="Enter Moment of Inertia (I)" required>
+            <label for="V">Volume of Displacement (V) [m<sup>3</sup>]:</label>
+            <input type="number" id="V" step="any" placeholder="Enter Volume of Displacement (V)" required>
+            <label for="m">Distance (m) [m]:</label>
+            <input type="number" id="m" step="any" placeholder="Enter Distance from Gravity to Buoyancy (m)" required>
+            <button onclick="calculateTheoreticalGM()">Calculate Theoretical GM</button>
+            <div id="theoreticalResult" class="result" style="display: none;"></div>
+        </div>
+
+        <!-- Experimental Calculator Section -->
+        <div id="experimental-calculator" class="section">
+            <h2>Experimental Metacentric Height Calculator</h2>
+            <label for="w1">Additional Weight (w1) [N or kg]:</label>
+            <input type="number" id="w1" step="any" placeholder="Enter Weight Added" required>
+            <label for="Y">Distance from Center (Y) [m]:</label>
+            <input type="number" id="Y" step="any" placeholder="Enter Distance" required>
+            <label for="W">Total Weight (W) [N or kg]:</label>
+            <input type="number" id="W" step="any" placeholder="Enter Weight of Floating Body" required>
+            <label for="theta">Tilt Angle (θ) [degrees]:</label>
+            <input type="number" id="theta" step="any" placeholder="Enter Tilt Angle" required>
+            <button onclick="calculateExperimentalGM()">Calculate Experimental GM</button>
+            <div id="experimentalResult" class="result" style="display: none;"></div>
+        </div>
+
+        <div class="team">
+            <h2>Team Members</h2>
+            <p>Lakshya Gupta, Zorawar Singh, Sarthak Dixit, Vishal, Urvashi</p>
+        </div>
+    </div>
+
+    <script>
+        // Theoretical Calculator
+        function calculateTheoreticalGM() {
+            const I = parseFloat(document.getElementById('I').value);
+            const V = parseFloat(document.getElementById('V').value);
+            const m = parseFloat(document.getElementById('m').value);
+
+            if (!I || !V || !m) {
+                alert("Please enter valid values for I, V, and m.");
+                return;
+            }
+
+            const GM = (I / V) + m;
+
+            document.getElementById('theoreticalResult').style.display = 'block';
+            document.getElementById('theoreticalResult').textContent = `Theoretical GM: ${GM.toFixed(4)} meters`;
+        }
+
+        // Experimental Calculator
+        function calculateExperimentalGM() {
+            const w1 = parseFloat(document.getElementById('w1').value);
+            const Y = parseFloat(document.getElementById('Y').value);
+            const W = parseFloat(document.getElementById('W').value);
+            const theta = parseFloat(document.getElementById('theta').value);
+
+            if (!w1 || !Y || !W || theta === 0 || !theta) {
+                alert("Please enter valid values for w1, Y, W, and a non-zero θ.");
+                return;
+            }
+
+            const tanTheta = Math.tan(theta * Math.PI / 180); // Convert degrees to radians
+            const GM = (w1 * Y) / (W * tanTheta);
+
+            document.getElementById('experimentalResult').style.display = 'block';
+            document.getElementById('experimentalResult').textContent = `Experimental GM: ${GM.toFixed(4)} meters`;
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
